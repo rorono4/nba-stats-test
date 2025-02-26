@@ -11,9 +11,13 @@ function App() {
     // Recupera la lista delle squadre all'avvio
     useEffect(() => {
         axios.get(`${API_BASE_URL}/teams`)
-            .then(response => setTeams(response.data.teams))
+            .then(response => {
+                console.log("Lista squadre ricevuta:", response.data.teams); // 👈 Log per debug
+                setTeams(response.data.teams);
+            })
             .catch(error => console.error("Errore nel recupero squadre:", error));
     }, []);
+    
 
     // Recupera i dati della squadra selezionata
     useEffect(() => {
