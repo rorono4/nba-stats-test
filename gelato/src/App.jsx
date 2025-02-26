@@ -2,17 +2,41 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-    const [teamData, setTeamData] = useState(null);
+    const [teams, setTeams] = useState([]); // Lista squadre
+    const [selectedTeam, setSelectedTeam] = useState("Atlanta Hawks"); // Squadra iniziale
+    const [teamData, setTeamData] = useState(null); // Dati squadra selezionata
 
+    const API_BASE_URL = "https://backend.onrender.com"; // Sostituisci con il tuo URL API su Render
+
+    // Recupera la lista delle squadre all'avvio
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/teams/Atlanta Hawks")
-            .then(response => setTeamData(response.data.team_data))
-            .catch(error => console.error("Errore nel recupero dati:", error));
+        axios.get(`${API_BASE_URL}/teams`)
+            .then(response => setTeams(response.data.teams))
+            .catch(error => console.error("Errore nel recupero squadre:", error));
     }, []);
+
+    // Recupera i dati della squadra selezionata
+    useEffect(() => {
+        if (selectedTeam) {
+            axios.get(`${API_BASE_URL}/teams/${encodeURIComponent(selectedTeam)}`)
+                .then(response => setTeamData(response.data.team_data))
+                .catch(error => console.error("Errore nel recupero dati squadra:", error));
+        }
+    }, [selectedTeam]); // Si aggiorna quando cambia la squadra selezionata
 
     return (
         <div>
             <h1>Benvenuto nel mio sito NBA</h1>
+
+            {/* Dropdown per selezionare una squadra */}
+            <label>Seleziona una squadra: </label>
+            <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>
+                {teams.map(team => (
+                    <option key={team} value={team}>{team}</option>
+                ))}
+            </select>
+
+            {/* Mostra i dati della squadra selezionata */}
             {teamData ? (
                 <div>
                     <h2>{teamData.team_name}</h2>
