@@ -3,23 +3,21 @@ import axios from "axios";
 
 function App() {
     const [teams, setTeams] = useState([]); // Lista squadre
-    const [selectedTeam, setSelectedTeam] = useState("Atlanta Hawks"); // Squadra iniziale
+    const [selectedTeam, setSelectedTeam] = useState(""); // Squadra iniziale vuota
     const [teamData, setTeamData] = useState(null); // Dati squadra selezionata
 
-    const API_BASE_URL = "https://backend.onrender.com"; // Sostituisci con il tuo URL API su Render
+    const API_BASE_URL = "https://nba-stats-test.onrender.com"; // Corretto l'URL del backend
 
     // Recupera la lista delle squadre all'avvio
     useEffect(() => {
         axios.get(`${API_BASE_URL}/teams`)
             .then(response => {
-                console.log("Dati ricevuti dal backend:", response.data); // 👈 Controlliamo il contenuto
+                console.log("Dati ricevuti dal backend:", response.data); 
                 setTeams(response.data.teams);
             })
             .catch(error => console.error("Errore nel recupero squadre:", error));
     }, []);
   
-    
-
     // Recupera i dati della squadra selezionata
     useEffect(() => {
         if (selectedTeam) {
@@ -27,7 +25,7 @@ function App() {
                 .then(response => setTeamData(response.data.team_data))
                 .catch(error => console.error("Errore nel recupero dati squadra:", error));
         }
-    }, [selectedTeam]); // Si aggiorna quando cambia la squadra selezionata
+    }, [selectedTeam]);
 
     return (
         <div>
@@ -36,9 +34,14 @@ function App() {
             {/* Dropdown per selezionare una squadra */}
             <label>Seleziona una squadra: </label>
             <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>
-                {teams.map(team => (
-                    <option key={team} value={team}>{team}</option>
-                ))}
+                <option value="">Seleziona una squadra</option>  {/* Opzione iniziale */}
+                {teams.length > 0 ? (
+                    teams.map((team, index) => (
+                        <option key={index} value={team}>{team}</option>
+                    ))
+                ) : (
+                    <option value="" disabled>Caricamento squadre...</option>
+                )}
             </select>
 
             {/* Mostra i dati della squadra selezionata */}
