@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import psycopg2
 import json
+import os
 
 app = FastAPI()
 
@@ -15,31 +16,39 @@ app.add_middleware(
 )
 
 
-# Connessione al database
 def get_db_connection():
-    return psycopg2.connect(
-        dbname="sport_stats",
-        user="postgres",
-        password="Bracalozz0!",  # Sostituisci con la tua password
-        host="localhost",
-        port="5432"
-    )
+    return psycopg2.connect(os.environ["DATABASE_URL"])
+
+
+# # Connessione al database
+# def get_db_connection():
+#     return psycopg2.connect(
+#         dbname="sport_stats",
+#         user="postgres",
+#         password="Bracalozz0!",  # Sostituisci con la tua password
+#         host="localhost",
+#         port="5432"
+#     )
 
 # Endpoint base
 @app.get("/")
 def home():
     return {"message": "API NBA attiva!"}
 
-# Endpoint per ottenere tutti i team NBA
+# Endpoint per ottenere tutti i team NBA con gestione degli errori
 @app.get("/teams")
 def get_teams():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT team_name FROM nba_team_stats ORDER BY team_name;")
-    teams = [row[0] for row in cur.fetchall()]
-    cur.close()
-    conn.close()
-    return {"teams": teams}
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT team_name FROM nba_team_stats ORDER BY team_name;")
+        teams = [row[0] for row in cur.fetchall()]
+        cur.close()
+        conn.close()
+        return {"teams": teams}
+    except Exception as e:
+        return {"error": str(e)}  # 👈 Stampa l'errore come risposta JSON
+
 
 # Endpoint per ottenere i dati di una squadra specifica
 @app.get("/teams/{team_name}")
