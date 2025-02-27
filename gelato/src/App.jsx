@@ -17,7 +17,7 @@ function App() {
             })
             .catch(error => console.error("Errore nel recupero squadre:", error));
     }, []);
-    
+  
     
 
     // Recupera i dati della squadra selezionata
