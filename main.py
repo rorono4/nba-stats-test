@@ -9,33 +9,22 @@ app = FastAPI()
 # ✅ Abilitare CORS per permettere al frontend di accedere all'API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permette richieste da qualsiasi dominio (puoi specificare solo "http://localhost:5173" se preferisci)
+    allow_origins=["*"],  # Permette richieste da qualsiasi dominio
     allow_credentials=True,
     allow_methods=["*"],  # Permette tutti i metodi (GET, POST, PUT, DELETE)
     allow_headers=["*"],  # Permette tutti gli headers
 )
 
-
+# ✅ Connessione al database con DATABASE_URL (Render)
 def get_db_connection():
     return psycopg2.connect(os.environ["DATABASE_URL"])
 
-
-# # Connessione al database
-# def get_db_connection():
-#     return psycopg2.connect(
-#         dbname="sport_stats",
-#         user="postgres",
-#         password="Bracalozz0!",  # Sostituisci con la tua password
-#         host="localhost",
-#         port="5432"
-#     )
-
-# Endpoint base
+# 🔹 Endpoint base
 @app.get("/")
 def home():
     return {"message": "API NBA attiva!"}
 
-# Endpoint per ottenere tutti i team NBA con gestione degli errori
+# 🔹 Endpoint per ottenere tutti i team NBA
 @app.get("/teams")
 def get_teams():
     try:
@@ -47,10 +36,9 @@ def get_teams():
         conn.close()
         return {"teams": teams}
     except Exception as e:
-        return {"error": str(e)}  # 👈 Stampa l'errore come risposta JSON
+        return {"error": str(e)}
 
-
-# Endpoint per ottenere i dati di una squadra specifica
+# 🔹 Endpoint per ottenere i dati di una squadra specifica
 @app.get("/teams/{team_name}")
 def get_team_stats(team_name: str):
     conn = get_db_connection()
@@ -80,3 +68,35 @@ def get_team_stats(team_name: str):
     
     return {"error": "Squadra non trovata"}
 
+# 🔹 NUOVO: Endpoint per ottenere i dati dei giocatori di una squadra
+@app.get("/players/{team_name}")
+def get_players(team_name: str):
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # ✅ Recuperiamo i giocatori dalla tabella `nba_player_stats`
+        cur.execute("""
+            SELECT player_name, position, minutes, points, rebounds, assists, 
+                   field_goals_made, field_goals_attempted, three_points_made, 
+                   three_points_attempted, free_throws_made, free_throws_attempted
+            FROM nba_player_stats 
+            WHERE team_name = %s 
+            ORDER BY points DESC;  -- Ordiniamo per punti
+        """, (team_name,))
+        
+        players = cur.fetchall()
+        cur.close()
+        conn.close()
+
+        # ✅ Struttura dei dati da restituire
+        columns = ["player_name", "position", "minutes", "points", "rebounds", "assists",
+                   "field_goals_made", "field_goals_attempted", "three_points_made",
+                   "three_points_attempted", "free_throws_made", "free_throws_attempted"]
+        
+        players_data = [dict(zip(columns, player)) for player in players]
+        
+        return {"players": players_data}
+
+    except Exception as e:
+        return {"error": str(e)}
