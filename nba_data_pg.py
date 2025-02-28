@@ -719,8 +719,6 @@ for team_name, team_id in teams_opp.items():
         
         opponent_avg_stats['team_name'] = team_name
         all_opponent_stats.append(opponent_avg_stats)
-
-        print(f"✅ Dati opponent raccolti per {team_name}.")
         time.sleep(3)  
 
     except Exception as e:
