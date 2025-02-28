@@ -28,75 +28,75 @@ cur = conn.cursor()
 #PLAYERS
 #Giocatori e relativi ID
 hawks_players = {
-    "Young": 1629027, "Daniels": 1630700, "Risacher": 1642258, "Okongwu": 1630168, "LeVert": 1627747,
-    "Mann": 1629611, "Niang": 1627777, "Capela": 203991, "Krejčí": 1630249, "Nance Jr": 1626204,
-    "Gueye": 1631243, "Mathews": 1629726, "Wallace": 1630811, "Roddy": 1631223, "Barlow": 1631230
+     "Young": 1629027, "Daniels": 1630700, "Risacher": 1642258, "Okongwu": 1630168, "LeVert": 1627747,
+     "Mann": 1629611, "Niang": 1627777, "Capela": 203991, "Krejčí": 1630249, "Nance Jr": 1626204,
+     "Gueye": 1631243, "Mathews": 1629726, "Wallace": 1630811, "Barlow": 1631230, "Plowden": 1631342
 }
 
 celtics_players = {
-    "Tatum": 1628369, "Brown": 1627759, "White": 1628401, "Porzingis": 204001, "Holiday": 201950,
-    "Pritchard": 1630202, "Horford": 201143, "Hauser": 1630573, "Kornet": 1628436, "Craig": 1628470, "Queta": 1629674,
-    "Walsh": 1641775, "Tillman": 1630214, "Peterson": 1641809
+     "Tatum": 1628369, "Brown": 1627759, "White": 1628401, "Porzingis": 204001, "Holiday": 201950,
+     "Pritchard": 1630202, "Horford": 201143, "Hauser": 1630573, "Kornet": 1628436, "Craig": 1628470, "Queta": 1629674,
+     "Walsh": 1641775, "Tillman": 1630214, "Peterson": 1641809
 }
 
 nets_players = {
-    "Thomas": 1630560, "Johnson": 1629661, "Russell": 1626156, "Claxton": 1629651,
-    "K.Johnson": 1630553, "Wilson": 1630592, "Z.Williams": 1630533, "Clowney": 1641730, "T.Martin": 1631213,
-    "Evbuomwan": 1641787, "Sharpe": 1630549, "Watford": 1630570, "Whitehead": 1641727
+     "Thomas": 1630560, "Johnson": 1629661, "Russell": 1626156, "Claxton": 1629651,
+     "K.Johnson": 1630553, "Wilson": 1630592, "Z.Williams": 1630533, "Clowney": 1641730, "T.Martin": 1631213,
+     "Evbuomwan": 1641787, "Sharpe": 1630549, "Watford": 1630570, "Whitehead": 1641727, "Hayes": 1630165
 }
 
 hornets_players = {
-    "LaMelo Ball": 1630163, "Miles Bridges": 1628970, "Green": 1630182, "Mark Williams": 1631109, "Smith Jr": 1641733, 
-    "Nurkic": 203994, "Diabate": 1631217, "Okogie": 1629006, "Curry": 203552, "KJ Simpson": 1642354,
-    "Jeffries": 1629610, "Wong": 1631209, "Salaun": 1642275, "Gibson": 201959
+     "LaMelo Ball": 1630163, "Miles Bridges": 1628970, "Green": 1630182, "Mark Williams": 1631109, "Smith Jr": 1641733, 
+     "Nurkic": 203994, "Diabate": 1631217, "Okogie": 1629006, "Curry": 203552, "KJ Simpson": 1642354,
+     "Jeffries": 1629610, "Wong": 1631209, "Salaun": 1642275, "Gibson": 201959, "E.Payton": 203901
 }
 
 bulls_players = {
-    "Coby White": 1629632, "Vučević": 202696, "Dosunmu": 1630245, "Giddey": 1630581, "Patrick Williams": 1630172,
-    "Lonzo Ball": 1628366, "Jalen Smith": 1630188, "Huerter": 1628989, "Tre Jones": 1630200, "Buzelis": 1641824,
-    "Terry": 1631207, "Philips": 1641763, "Horton-Tucker": 1629659, "Collins": 1628380, "J.Carter": 1628975
+     "Coby White": 1629632, "Vučević": 202696, "Dosunmu": 1630245, "Giddey": 1630581, "Patrick Williams": 1630172,
+     "Lonzo Ball": 1628366, "Jalen Smith": 1630188, "Huerter": 1628989, "Tre Jones": 1630200, "Buzelis": 1641824,
+     "Terry": 1631207, "Philips": 1641763, "Horton-Tucker": 1629659, "Collins": 1628380, "J.Carter": 1628975
 }
 
 cavs_players = {
-    "Mitchell": 1628378, "Garland": 1629636, "Mobley": 1630596, "Allen": 1628386, "Wade": 1629731,
-    "Strus": 1629622, "Hunter": 1629631, "Okoro": 1630171, "Ty Jerome": 1629660, "Merrill": 1630241,
-    "Porter": 1641854, "Tristan Thompson": 202684
+     "Mitchell": 1628378, "Garland": 1629636, "Mobley": 1630596, "Allen": 1628386, "Wade": 1629731,
+     "Strus": 1629622, "Hunter": 1629631, "Okoro": 1630171, "Ty Jerome": 1629660, "Merrill": 1630241,
+     "Javonte Green": 1629750, "Porter": 1641854, "Tristan Thompson": 202684
 }
 
 mavs_players = {
-    "Davis": 203076, "Irving": 202681, "Thompson": 202691, "Washington": 1629023, "Gafford": 1629655, #"Lively": 1641726,
-    "Christie": 1631108, "Marshall": 1630230, "Caleb Martin": 1628997, "Dinwiddie": 203915,
-    "Hardy": 1630702, "Exum": 203957, "Prosper": 1641765, "Edwards": 1630556, "Powell": 203939, "Brandon Williams": 1630314
+     "Davis": 203076, "Irving": 202681, "Thompson": 202691, "Washington": 1629023, "Gafford": 1629655, #"Lively": 1641726,
+     "Christie": 1631108, "Marshall": 1630230, "Caleb Martin": 1628997, "Dinwiddie": 203915,
+     "Hardy": 1630702, "Exum": 203957, "Prosper": 1641765, "Edwards": 1630556, "Powell": 203939, "Brandon Williams": 1630314
 }
 
 nuggets_players = {
-    "Jokic": 203999, "Porter Jr": 1629008, "Murray": 1627750, "Westbrook": 201566, "Gordon": 203932,
-    "Braun": 1631128, "Watson": 1631212, "Strawther": 1631124, "DeAndre Jordan": 201599, "Šarić": 203967,
-    "Nnaji": 1630192, "Pickett": 1629618, "Tyson": 1641816
+     "Jokic": 203999, "Porter Jr": 1629008, "Murray": 1627750, "Westbrook": 201566, "Gordon": 203932,
+     "Braun": 1631128, "Watson": 1631212, "Strawther": 1631124, "DeAndre Jordan": 201599, "Šarić": 203967,
+     "Nnaji": 1630192, "Pickett": 1629618, "Tyson": 1641816
 }
 
 pistons_players = {
-    "Cunningham": 1630595, "Harris": 202699, "Thompson": 1641709, "Hardaway Jr": 203501, "Duren": 1631105,
-    "Schroder": 203471, "Beasley": 1627736, "Stewart": 1630191, "Fontecchio": 1631323, "Holland": 1641842,
-    "Sasser": 1631204, "Waters III": 1630322, "Moore Jr": 1631111
+     "Cunningham": 1630595, "Harris": 202699, "Thompson": 1641709, "Hardaway Jr": 203501, "Duren": 1631105,
+     "Schroder": 203471, "Beasley": 1627736, "Stewart": 1630191, "Fontecchio": 1631323, "Holland": 1641842,
+     "Sasser": 1631204, "Waters III": 1630322
 }
 
 warriors_players = {
-    "Stephen Curry": 201939, "Draymond Green": 203110, "Jimmy Butler": 202710, "Kuminga": 1630228, "Post": 1642366,
-    "Hield": 1627741, "Podziemski": 1641764, "Jackson-Davis": 1631218, "Moody": 1630541, "Looney": 1626172,
-    "Gui Santos": 1630611
+     "Stephen Curry": 201939, "Draymond Green": 203110, "Jimmy Butler": 202710, "Kuminga": 1630228, "Post": 1642366,
+     "Hield": 1627741, "Podziemski": 1641764, "Jackson-Davis": 1631218, "Moody": 1630541, "Looney": 1626172, "Payton II": 1627780,
+     "Gui Santos": 1630611, "Spencer": 1630311
 }
 
 rockets_players = {
-    "VanVleet": 1627832, "Green": 1630224, "Brooks": 1628415, "Sengun": 1630578, "Smith": 1631095,
-    "A.Thompson": 1641708, "Eason": 1631106, "Whitmore": 1641715, "Adams": 203500, "Aaron Holiday": 1628988,
-    "Tate": 1630256, "Sheppard": 1642263, "Landale": 1629111
+     "VanVleet": 1627832, "Green": 1630224, "Brooks": 1628415, "Sengun": 1630578, "Smith": 1631095,
+     "A.Thompson": 1641708, "Eason": 1631106, "Whitmore": 1641715, "Adams": 203500, "Aaron Holiday": 1628988,
+     "Tate": 1630256, "Sheppard": 1642263, "Landale": 1629111
 }
 
 pacers_players = {
-    "Haliburton": 1630169, "Siakam": 1627783, "Mathurin": 1631097, "Turner": 1626167, "Nembhard": 1629614,
-    "Nesmith": 1630174, "Sheppard": 1641767, "Toppin": 1630167, "McConnell": 204456, "Walker": 1641716,
-    "Bryant": 1628418, "Furphy": 1642277
+     "Haliburton": 1630169, "Siakam": 1627783, "Mathurin": 1631097, "Turner": 1626167, "Nembhard": 1629614,
+     "Nesmith": 1630174, "Sheppard": 1641767, "Toppin": 1630167, "McConnell": 204456, "Walker": 1641716,
+     "Bryant": 1628418, "Furphy": 1642277
 }
 
 clippers_players = {
@@ -107,14 +107,14 @@ clippers_players = {
 
 lakers_players = {
     "LeBron James": 2544, "Doncic": 1629029, "Reaves": 1630559, "Hayes": 1629637, "Hachimura": 1629060, "Finney-Smith": 1627827, 
-    "Knecht": 1642261, "J.Goodwin": 1630692, "Vanderbilt": 1629020, "Vincent": 1629216, "Milton": 1629003, "Reddish": 1629629 ,
+    "Knecht": 1642261, "J.Goodwin": 1630692, "Vanderbilt": 1629020, "Vincent": 1629216, "Milton": 1629003, "Len": 203458,
     "Koloko": 1631132, "Morris": 202693, "Jemison": 1641998
 }
 
 grizzlies_players = {
     "Morant": 1629630, "Jackson Jr": 1628991, "Bane": 1630217, "Edey": 1641744, "Wells": 1642377,
     "Aldama": 1630583, "Kennard": 1628379, "Pippen Jr": 1630590, "GG Jackson": 1641713, "Clarke": 1629634,
-    "Huff": 1630643, "Bagley III": 1628963, "Johnny Davis": 1631098
+    "Huff": 1630643, "Bagley III": 1628963, "V.Williams": 1631246, "Konchar": 1629723 ,"Johnny Davis": 1631098
 }
 
 heat_players = {
@@ -132,13 +132,13 @@ bucks_players = {
 timberwolves_players = {
     "Edwards": 1630162, "Randle": 203944, "Gobert": 203497, "McDaniels": 1630183, "Conley": 201144,
     "Reid": 1629675, "DiVincenzo": 1628978, "Alexander-Walker": 1629638, "Dillingham": 1642265, "Minott": 1631169,
-    "Clark": 1641740, "Ingles": 204060, "Garza": 1630568
+    "Clark": 1641740, "Shannon": 1630545, "Ingles": 204060, "Garza": 1630568
 }
 
 pelicans_players = {
-    "Murphy III": 1630530, "McCollum": 203468, "Zion": 1629627, "Missi": 1642274, "Herb Jones": 1630529,
-    "Javonte Green": 1629750, "Bruce Brown": 1628971, "Boston": 1630527, "Hawkins": 1641722, "Alvarado": 1630631, "Rob-Earl": 1630526,
-    "Olynyk": 203482, "Matkovic": 1631255, "Cain": 1631288
+    "Murphy III": 1630530, "McCollum": 203468, "Zion": 1629627, "Missi": 1642274, "Alvarado": 1630631, #"Herb Jones": 1630529,
+    "Bruce Brown": 1628971, "Boston": 1630527, "Hawkins": 1641722, "Rob-Earl": 1630526,
+    "Olynyk": 203482, "Matkovic": 1631255, "Cain": 1631288, "Reeves": 1641810
 }
 
 knicks_players = {
@@ -163,13 +163,13 @@ magic_players = {
 sixers_players = {
     "Maxey": 1630178, "Embiid": 203954, "Paul George": 202331, "Oubre": 1626162, "Grimes": 1629656,
     "Yabusele": 1627824, "Justin Edwards": 1642348, "Gordon": 201569, "Lowry": 200768, "Drummond": 203083,
-    "Council IV": 1641741, "Jared Butler": 1630215, "Dowtin": 1630288, "Bona": 1641737
+    "Council IV": 1641741, "Jared Butler": 1630215, "Dowtin": 1630288, "Bona": 1641737, "Roddy": 1631223
 }
 
 suns_players = {
     "Booker": 1626164, "Durant": 201142, "Beal": 203078, "Tyus Jones": 1626145, "Richards": 1630208,
     "Allen": 1628960, "O'Neale": 1626220, "Dunn": 1642346, "Cody Martin": 1628998, "Micic": 203995,
-    "Plumlee": 203486, "Ighodaro": 1642345, "Morris": 1628420
+    "Plumlee": 203486, "Ighodaro": 1642345, "Morris": 1628420, "Bol": 1629626
 }
 
 blazers_players = {
@@ -181,13 +181,13 @@ blazers_players = {
 kings_players = {
     "LaVine": 203897, "Sabonis": 1627734, "DeRozan": 201942, "Monk": 1628370, "Murray": 1631099,
     "Ellis": 1631165, "Lyles": 1626168, "Valančiūnas": 202685, "LaRavia": 1631222, "McDermott": 203926,
-    "Crowder": 203109, "Devin Carter": 1642269
+    "Crowder": 203109, "Devin Carter": 1642269, "Fultz": 1628365
 }
 
-spurs_players = {
-    "Wembanyama": 1641705, "Fox": 1628368, "Chris Paul": 101108, "Vassell": 1630170, "Barnes": 203084,
+spurs_players = { #"Wembanyama": 1641705
+    "Fox": 1628368, "Chris Paul": 101108, "Vassell": 1630170, "Barnes": 203084, "Biyombo": 282687,
     "Castle": 1642264, "K.Johnson": 1629640, "Champagnie": 1630577, "Sochan": 1631110, "Bassey": 1629646,
-    "Mamukelashvili": 1630572, "Wesley": 1631104, "Branham": 1631103, "McLaughlin": 1629162, "Baldwin III": 1631116
+    "Mamukelashvili": 1630572, "Wesley": 1631104, "Branham": 1631103, "McLaughlin": 1629162, "Baldwin jr": 1631116 
 }
 
 raptors_players = {
@@ -199,14 +199,14 @@ raptors_players = {
 jazz_players = {
     "Markkanen": 1628374, "Sexton": 1629012, "K.George": 1641718, "Kessler": 1631117, "Collins": 1628381,
     "Clarkson": 203903, "Collier": 1642268, "Filipowski": 1642271, "Juzang": 1630548, "Sensabaugh": 1641729,
-    "Mykhailiuk": 1629004, "Cody Williams": 1642262, "Potter": 1630695
+    "Mykhailiuk": 1629004, "Cody Williams": 1642262, "Potter": 1630695, "KJ Martin": 1630231, "Springer": 1630531
 }
 
 wizards_players = {
     "Coulibaly": 1641731, "Poole": 1629673, "Middleton": 203114, "Sarr": 1642259, "Smart": 203935,
     "Brogdon": 1627763, "Carrington": 1642267, "Kispert": 1630557, "K.George": 1642273, "Champagnie": 1630551,
-    "Holmes": 1626158, "Vukcevic": 1641774, "Len": 203458, "AJ Johnson": 1642358, "Cissoko": 1631321
-}
+    "Holmes": 1626158, "Vukcevic": 1641774, "AJ Johnson": 1642358
+    }
 
 
 ##################
@@ -323,9 +323,9 @@ def align_previous_data(stats):
     return stats
 
 
-def process_players(players):
+def process_players(players, team_name):
     for player_name, player_id in players.items():
-        print(f"Elaborazione dati per {player_name}...")
+        print(f"Elaborazione dati per {player_name} nella squadra {team_name}...")
 
         # 📌 Recupera posizione e numero di maglia
         player_number, player_position = get_player_info(player_id)
@@ -335,24 +335,26 @@ def process_players(players):
         stats = align_previous_data(stats)
         season_averages = get_season_averages(player_id)
 
-        # 📌 Query per inserire nel database
+        # 📌 Query per inserire nel database, aggiunto `team_name`
         query = """
             INSERT INTO nba_player_stats (
-                player_number, player_position, player_name, minutes_average, points_average, rebounds_average,
-                assists_average, three_points_made_average, prev_points_1, prev_points_2, prev_points_3, 
-                prev_points_4, prev_points_5, prev_points_6, prev_points_7, prev_rebounds_1, prev_rebounds_2, 
-                prev_rebounds_3, prev_rebounds_4, prev_rebounds_5, prev_rebounds_6, prev_rebounds_7, 
-                prev_assists_1, prev_assists_2, prev_assists_3, prev_assists_4, prev_assists_5, prev_assists_6, 
-                prev_assists_7, prev_three_points_1, prev_three_points_2, prev_three_points_3, prev_three_points_4, 
-                prev_three_points_5, prev_three_points_6, prev_three_points_7, prev_minutes_1, prev_minutes_2, 
-                prev_minutes_3, prev_plus_minus_1, prev_plus_minus_2, prev_plus_minus_3
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                team_name, player_number, player_position, player_name, minutes_average, 
+                points_average, rebounds_average, assists_average, three_points_made_average, 
+                prev_points_1, prev_points_2, prev_points_3, prev_points_4, prev_points_5, 
+                prev_points_6, prev_points_7, prev_rebounds_1, prev_rebounds_2, prev_rebounds_3, 
+                prev_rebounds_4, prev_rebounds_5, prev_rebounds_6, prev_rebounds_7, prev_assists_1, 
+                prev_assists_2, prev_assists_3, prev_assists_4, prev_assists_5, prev_assists_6, 
+                prev_assists_7, prev_three_points_1, prev_three_points_2, prev_three_points_3, 
+                prev_three_points_4, prev_three_points_5, prev_three_points_6, prev_three_points_7, 
+                prev_minutes_1, prev_minutes_2, prev_minutes_3, prev_plus_minus_1, prev_plus_minus_2, 
+                prev_plus_minus_3
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 
+                      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
 
-        # 📌 Costruisci il pacchetto dati
+        # 📌 Costruisci il pacchetto dati con `team_name`
         data = (
-            player_number, player_position, player_name, 
+            team_name, player_number, player_position, player_name, 
             season_averages["MIN"], season_averages["PTS"], season_averages["REB"], 
             season_averages["AST"], season_averages["3PM"],
             *stats["PTS"], *stats["REB"], *stats["AST"], *stats["3PM"], *stats["MIN"], *stats["PLUS_MINUS"]
@@ -363,67 +365,40 @@ def process_players(players):
 
     conn.commit()
     time.sleep(3)
-    print("✅ Dati giocatori aggiornati nel database!")
+    print(f"✅ Dati dei giocatori per {team_name} aggiornati nel database!")
 
-process_players(hawks_players)
 
-process_players(celtics_players)
-
-process_players(nets_players)
-
-process_players(hornets_players)
-
-process_players(bulls_players)
-
-process_players(cavs_players)
-
-process_players(mavs_players)
-
-process_players(nuggets_players)
-
-process_players(pistons_players)
-
-process_players(warriors_players)
-
-process_players(rockets_players)
-
-process_players(pacers_players)
-
-process_players(clippers_players)
-
-process_players(lakers_players)
-
-process_players(grizzlies_players)
-
-process_players(heat_players)
-
-process_players(bucks_players)
-
-process_players(timberwolves_players)
-
-process_players(pelicans_players)
-
-process_players(knicks_players)
-
-process_players(thunder_players)
-
-process_players(magic_players)
-
-process_players(sixers_players)
-
-process_players(suns_players)
-
-process_players(blazers_players)
-
-process_players(kings_players)
-
-process_players(spurs_players)
-
-process_players(raptors_players)
-
-process_players(jazz_players)
-
-process_players(wizards_players)
+# Chiamata alla funzione con `team_name`
+process_players(hawks_players, "Atlanta Hawks")
+process_players(celtics_players, "Boston Celtics")
+process_players(nets_players, "Brooklyn Nets")
+process_players(hornets_players, "Charlotte Hornets")
+process_players(bulls_players, "Chicago Bulls")
+process_players(cavs_players, "Cleveland Cavaliers")
+process_players(mavs_players, "Dallas Mavericks")
+process_players(nuggets_players, "Denver Nuggets")
+process_players(pistons_players, "Detroit Pistons")
+process_players(warriors_players, "Golden State Warriors")
+process_players(rockets_players, "Houston Rockets")
+process_players(pacers_players, "Indiana Pacers")
+process_players(clippers_players, "Los Angeles Clippers")
+process_players(lakers_players, "Los Angeles Lakers")
+process_players(grizzlies_players, "Memphis Grizzlies")
+process_players(heat_players, "Miami Heat")
+process_players(bucks_players, "Milwaukee Bucks")
+process_players(timberwolves_players, "Minnesota Timberwolves")
+process_players(pelicans_players, "New Orleans Pelicans")
+process_players(knicks_players, "New York Knicks")
+process_players(thunder_players, "Oklahoma City Thunder")
+process_players(magic_players, "Orlando Magic")
+process_players(sixers_players, "Philadelphia 76ers")
+process_players(suns_players, "Phoenix Suns")
+process_players(blazers_players, "Portland Trail Blazers")
+process_players(kings_players, "Sacramento Kings")
+process_players(spurs_players, "San Antonio Spurs")
+process_players(raptors_players, "Toronto Raptors")
+process_players(jazz_players, "Utah Jazz")
+process_players(wizards_players, "Washington Wizards")
 
 print("Dati dei giocatori aggiornati!")
 
