@@ -348,7 +348,7 @@ def process_players(players, team_name):
                 prev_three_points_4, prev_three_points_5, prev_three_points_6, prev_three_points_7, 
                 prev_minutes_1, prev_minutes_2, prev_minutes_3, prev_plus_minus_1, prev_plus_minus_2, 
                 prev_plus_minus_3
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 
                       %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
 
