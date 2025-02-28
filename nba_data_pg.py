@@ -354,11 +354,13 @@ def process_players(players, team_name):
 
         # 📌 Costruisci il pacchetto dati con `team_name`
         data = (
-            team_name, player_number, player_position, player_name, 
+            team_name,  # ✅ Aggiunto qui
+            player_number, player_position, player_name, 
             season_averages["MIN"], season_averages["PTS"], season_averages["REB"], 
             season_averages["AST"], season_averages["3PM"],
             *stats["PTS"], *stats["REB"], *stats["AST"], *stats["3PM"], *stats["MIN"], *stats["PLUS_MINUS"]
         )
+
 
         # 📌 Esegui l'inserimento nel database
         cur.execute(query, data)
@@ -719,7 +721,8 @@ for team_name, team_id in teams_opp.items():
         
         opponent_avg_stats['team_name'] = team_name
         all_opponent_stats.append(opponent_avg_stats)
-        time.sleep(3)  
+
+        time.sleep(2)  
 
     except Exception as e:
         print(f"⚠️ Errore nell'elaborazione per {team_name}: {e}")
