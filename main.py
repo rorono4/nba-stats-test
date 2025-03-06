@@ -138,8 +138,6 @@ def get_opponent_stats(team_name: str):
     return {"error": "Dati avversari non trovati"}
 
 
-
-
 @app.get("/matchup/{team1}/{team2}")
 def compare_teams(team1: str, team2: str):
     conn = get_db_connection()
@@ -173,3 +171,34 @@ def compare_teams(team1: str, team2: str):
         return {"team1": team1_dict, "team2": team2_dict}
     
     return {"error": "Dati delle squadre non trovati"}
+
+@app.get("/team_matchup/{team_name}")
+def get_team_matchup(team_name: str):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Recupera i dati della squadra
+    cur.execute("SELECT * FROM nba_team_stats WHERE team_name = %s;", (team_name,))
+    team_data = cur.fetchone()
+    
+    # Recupera i dati dell'avversario
+    cur.execute("SELECT * FROM nba_opponent_stats WHERE team_name = %s;", (team_name,))
+    opponent_data = cur.fetchone()
+
+    cur.close()
+    conn.close()
+
+    if team_data and opponent_data:
+        columns = ["id", "team_name", "PTS", "REB", "OREB", "DREB",
+                   "AST", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%", 
+                   "FTM", "FTA", "FT%", "rank_PTS", "rank_REB", "rank_OREB", "rank_DREB",
+                   "rank_AST", "rank_FGM", "rank_FGA", "rank_FG%", "rank_3PM", "rank_3PA", "rank_3P%",
+                   "rank_FTM", "rank_FTA", "rank_FT%"]
+
+        # Converte i dati in dizionari leggibili
+        team_dict = dict(zip(columns, team_data))
+        opponent_dict = dict(zip(columns, opponent_data))
+
+        return {"team": team_dict, "opponent": opponent_dict}
+    
+    return {"error": "Dati non trovati per questa squadra"}
