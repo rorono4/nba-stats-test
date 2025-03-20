@@ -3,49 +3,57 @@ import axios from "axios";
 
 function App() {
     const [teams, setTeams] = useState([]); // Lista squadre
-    const [selectedTeam, setSelectedTeam] = useState(""); // Squadra iniziale vuota
+    const [selectedTeam, setSelectedTeam] = useState(""); // Squadra selezionata
     const [teamData, setTeamData] = useState(null); // Dati squadra selezionata
+    const [players, setPlayers] = useState([]); // Lista giocatori della squadra
+    const [selectedPlayer, setSelectedPlayer] = useState(""); // Giocatore selezionato
+    const [playerData, setPlayerData] = useState(null); // Dati del giocatore selezionato
 
-    const API_BASE_URL = "https://nba-stats-test.onrender.com"; // Corretto l'URL del backend
+    const API_BASE_URL = "https://nba-stats-test.onrender.com"; 
 
     // Recupera la lista delle squadre all'avvio
     useEffect(() => {
         axios.get(`${API_BASE_URL}/teams`)
-            .then(response => {
-                console.log("Dati ricevuti dal backend:", response.data); 
-                setTeams(response.data.teams);
-            })
+            .then(response => setTeams(response.data.teams))
             .catch(error => console.error("Errore nel recupero squadre:", error));
     }, []);
-  
-    // Recupera i dati della squadra selezionata
+
+    // Recupera i dati della squadra e la lista giocatori
     useEffect(() => {
         if (selectedTeam) {
             axios.get(`${API_BASE_URL}/teams/${encodeURIComponent(selectedTeam)}`)
                 .then(response => setTeamData(response.data.team_data))
                 .catch(error => console.error("Errore nel recupero dati squadra:", error));
+
+            axios.get(`${API_BASE_URL}/players/${encodeURIComponent(selectedTeam)}`)
+                .then(response => setPlayers(response.data.players))
+                .catch(error => console.error("Errore nel recupero giocatori:", error));
         }
     }, [selectedTeam]);
+
+    // Quando viene selezionato un giocatore, aggiorna i dati del giocatore
+    useEffect(() => {
+        if (selectedPlayer) {
+            const playerInfo = players.find(player => player.player_name === selectedPlayer);
+            setPlayerData(playerInfo);
+        }
+    }, [selectedPlayer, players]);
 
     return (
         <div>
             <h1>Benvenuto nel mio sito NBA</h1>
 
-            {/* Dropdown per selezionare una squadra */}
+            {/* Dropdown per squadre */}
             <label>Seleziona una squadra: </label>
             <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>
-                <option value="">Seleziona una squadra</option>  {/* Opzione iniziale */}
-                {teams.length > 0 ? (
-                    teams.map((team, index) => (
-                        <option key={index} value={team}>{team}</option>
-                    ))
-                ) : (
-                    <option value="" disabled>Caricamento squadre...</option>
-                )}
+                <option value="">Seleziona una squadra</option>
+                {teams.map((team, index) => (
+                    <option key={index} value={team}>{team}</option>
+                ))}
             </select>
 
-            {/* Mostra i dati della squadra selezionata */}
-            {teamData ? (
+            {/* Mostra dati squadra */}
+            {teamData && (
                 <div>
                     <h2>{teamData.team_name}</h2>
                     <p><strong>Punti:</strong> {teamData.points}</p>
@@ -62,29 +70,41 @@ function App() {
                     <p><strong>Free Throws Made:</strong> {teamData.free_throws_made}</p>
                     <p><strong>Free Throws Attempted:</strong> {teamData.free_throws_attempted}</p>
                     <p><strong>Free Throw %:</strong> {teamData.free_throw_percentage}</p>
-                    
-                    <h3>Classifiche</h3>
-                    <p><strong>Rank Punti:</strong> {teamData.team_rank_points}</p>
-                    <p><strong>Rank Rimbalzi:</strong> {teamData.team_rank_rebounds}</p>
-                    <p><strong>Rank Assist:</strong> {teamData.team_rank_assists}</p>
-                    <p><strong>Rank Field Goals Made:</strong> {teamData.team_rank_field_goals_made}</p>
-                    <p><strong>Rank Field Goal %:</strong> {teamData.team_rank_field_goal_percentage}</p>
-                    <p><strong>Rank Three Points Made:</strong> {teamData.team_rank_three_points_made}</p>
-                    <p><strong>Rank Three Point %:</strong> {teamData.team_rank_three_point_percentage}</p>
-                    <p><strong>Rank Free Throws Made:</strong> {teamData.team_rank_free_throws_made}</p>
-                    <p><strong>Rank Free Throw %:</strong> {teamData.team_rank_free_throw_percentage}</p>
-    
-                    <h3>Precedenti Partite</h3>
-                    <p><strong>Punti Precedenti:</strong> {teamData.prev_points_1}, {teamData.prev_points_2}, {teamData.prev_points_3}, {teamData.prev_points_4}, {teamData.prev_points_5}</p>
-                    <p><strong>Rimbalzi Precedenti:</strong> {teamData.prev_rebounds_1}, {teamData.prev_rebounds_2}, {teamData.prev_rebounds_3}, {teamData.prev_rebounds_4}, {teamData.prev_rebounds_5}</p>
-                    <p><strong>Assist Precedenti:</strong> {teamData.prev_assists_1}, {teamData.prev_assists_2}, {teamData.prev_assists_3}, {teamData.prev_assists_4}, {teamData.prev_assists_5}</p>
-                    <p><strong>Triple Segnate Precedenti:</strong> {teamData.prev_three_points_1}, {teamData.prev_three_points_2}, {teamData.prev_three_points_3}, {teamData.prev_three_points_4}, {teamData.prev_three_points_5}</p>
                 </div>
-            ) : (
-                <p>Caricamento dati...</p>
+            )}
+
+            {/* Dropdown per giocatori */}
+            {players.length > 0 && (
+                <>
+                    <label>Seleziona un giocatore: </label>
+                    <select value={selectedPlayer} onChange={(e) => setSelectedPlayer(e.target.value)}>
+                        <option value="">Seleziona un giocatore</option>
+                        {players.map((player, index) => (
+                            <option key={index} value={player.player_name}>{player.player_name}</option>
+                        ))}
+                    </select>
+                </>
+            )}
+
+            {/* Mostra dati giocatore */}
+            {playerData && (
+                <div>
+                    <h3>Statistiche di {playerData.player_name}</h3>
+                    <p><strong>Minuti Medi:</strong> {playerData.minutes_average}</p>
+                    <p><strong>Punti Medi:</strong> {playerData.points_average}</p>
+                    <p><strong>Rimbalzi Medi:</strong> {playerData.rebounds_average}</p>
+                    <p><strong>Assist Medi:</strong> {playerData.assists_average}</p>
+                    <p><strong>Triple Segnate:</strong> {playerData.three_points_made_average}</p>
+                    
+                    <h3>Prestazioni Precedenti</h3>
+                    <p><strong>Punti nelle ultime 5 partite:</strong> {playerData.prev_points_1}, {playerData.prev_points_2}, {playerData.prev_points_3}, {playerData.prev_points_4}, {playerData.prev_points_5}</p>
+                    <p><strong>Rimbalzi nelle ultime 5 partite:</strong> {playerData.prev_rebounds_1}, {playerData.prev_rebounds_2}, {playerData.prev_rebounds_3}, {playerData.prev_rebounds_4}, {playerData.prev_rebounds_5}</p>
+                    <p><strong>Assist nelle ultime 5 partite:</strong> {playerData.prev_assists_1}, {playerData.prev_assists_2}, {playerData.prev_assists_3}, {playerData.prev_assists_4}, {playerData.prev_assists_5}</p>
+                    <p><strong>Triple segnate nelle ultime 5 partite:</strong> {playerData.prev_three_points_1}, {playerData.prev_three_points_2}, {playerData.prev_three_points_3}, {playerData.prev_three_points_4}, {playerData.prev_three_points_5}</p>
+                </div>
             )}
         </div>
-    ); 
+    );
 }
 
 export default App;
