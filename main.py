@@ -126,6 +126,16 @@ def get_players(team_name: str):
         print(f"❌ Errore nel recupero giocatori: {str(e)}")
         return {"error": str(e)}
 
+@app.get("/debug/players")
+def debug_all_players():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT DISTINCT team_name FROM nba_player_stats;")
+    teams = cur.fetchall()
+    cur.close()
+    conn.close()
+    return {"teams_in_players_table": [t[0] for t in teams]}
+
 
 
 @app.get("/opponents/{team_name}")
