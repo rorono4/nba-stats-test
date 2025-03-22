@@ -74,8 +74,19 @@ def get_team_stats(team_name: str):
 @app.get("/players/{team_name}")
 def get_players(team_name: str):
     try:
+        print(f"🔍 Debug: Sto cercando i giocatori per '{team_name}'")  # LOG DI DEBUG
+
         conn = get_db_connection()
         cur = conn.cursor()
+
+        # Convertiamo il nome della squadra per garantire che sia uguale a quello nel database
+        normalized_team_name = team_name.replace("%20", " ").strip().lower()
+        # Se ci sono problemi con gli spazi nei nomi
+
+        # Log per controllare che il nome venga processato correttamente
+        print(f"🔍 Nome squadra normalizzato: '{normalized_team_name}'")
+
+        # Query per ottenere i giocatori della squadra selezionata
         cur.execute("""
             SELECT id, player_position, player_number, player_name, minutes_average, points_average,
                    rebounds_average, assists_average, three_points_made_average,
@@ -84,12 +95,17 @@ def get_players(team_name: str):
                    prev_assists_1, prev_assists_2, prev_assists_3, prev_assists_4, prev_assists_5, prev_assists_6, prev_assists_7,
                    prev_three_points_1, prev_three_points_2, prev_three_points_3, prev_three_points_4, prev_three_points_5, prev_three_points_6, prev_three_points_7,
                    prev_minutes_1, prev_minutes_2, prev_minutes_3, prev_plus_minus_1, prev_plus_minus_2, prev_plus_minus_3
-            FROM nba_player_stats WHERE team_name = %s ORDER BY player_name;
-        """, (team_name,))
-        
+            FROM nba_player_stats 
+            WHERE LOWER(team_name) = LOWER(%s) 
+            ORDER BY player_name;
+        """, (normalized_team_name,))
+
         players = cur.fetchall()
         cur.close()
         conn.close()
+
+        # Debug: stampiamo quanti giocatori sono stati trovati
+        print(f"🔍 Numero di giocatori trovati: {len(players)}")
 
         if players:
             columns = ["id", "player_position", "player_number", "player_name", "minutes_average", "points_average",
@@ -102,11 +118,14 @@ def get_players(team_name: str):
 
             player_list = [dict(zip(columns, player)) for player in players]
             return {"players": player_list}
-        
+
+        print("⚠️ Nessun giocatore trovato per questa squadra.")
         return {"error": "Nessun giocatore trovato per questa squadra"}
-    
+
     except Exception as e:
+        print(f"❌ Errore nel recupero giocatori: {str(e)}")
         return {"error": str(e)}
+
 
 
 @app.get("/opponents/{team_name}")
