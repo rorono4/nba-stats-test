@@ -137,7 +137,6 @@ def debug_all_players():
     return {"teams_in_players_table": [t[0] for t in teams]}
 
 
-
 @app.get("/opponents/{team_name}")
 def get_opponent_stats(team_name: str):
     conn = get_db_connection()
